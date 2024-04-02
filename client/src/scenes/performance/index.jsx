@@ -1,12 +1,15 @@
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import { use } from "state/api";
+import { useGetUserPerformanceQuery } from "state/api";
+import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import CustomColumnMenu from "components/DataGridCustomColumnMenu";
 const Admin = () => {
   const theme = useTheme();
-  const { data, isLoading } = use();
+  const userId = useSelector((state) => state.global.userId)
+  const { data, isLoading } = useGetUserPerformanceQuery(userId);
+  console.log("data", data);
 
   const columns = [
     {
@@ -51,7 +54,7 @@ const Admin = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="ADMINS" subtitle="Managing admins and list of admins" />
-      <Box
+      {/* <Box
         mt="40px"
         height="75vh"
         sx={{
@@ -85,7 +88,7 @@ const Admin = () => {
             ColumnMenu: CustomColumnMenu,
           }}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 };
